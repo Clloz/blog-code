@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.wrapper {
+            height: 200px;
+            width: 300px;
+            background: lightblue;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+        div.rotate {
+            height: 200px;
+            width: 500px;
+            /* position: absolute; */
+            margin-left: -50px;
+            margin-top: -100px;
+            background: red;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        div.rotate:hover {
+            -webkit-transform:rotate(-20deg);
+            transform:rotate(-20deg);
+            -webkit-transition:-webkit-transform 1s linear;
+            transition:transform 1s linear;
+        }
+        div.text {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="rotate">A</div>
+        <div class="text">B</div>
+    </div>    
+</body>
+</html>

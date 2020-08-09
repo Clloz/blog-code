@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lazyload</title>
+    <style>
+        .wrap {
+            width: 840px;
+            font-size: 0;
+            margin: 0 auto;
+            transform: translateX(-10px);
+        }
+
+        .wrap .img {
+            display: inline-block;
+            width: 200px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?1">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?2">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?3">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?4">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?5">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?6">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?7">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?8">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?9">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?10">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?11">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?12">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?13">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?14">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?15">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?16">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?17">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?18">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?19">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?20">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?21">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?22">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?23">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?24">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?25">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?26">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?27">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?28">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?29">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?30">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?31">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?32">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?33">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?34">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?35">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?36">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?37">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?38">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?39">
+        <img src="img/loading.gif" alt="" class="img" data-src="https://picsum.photos/200?40">
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(window).on('load', function () {
+            lazyLoad()
+            $(window).on('scroll', function () {
+                lazyLoad()
+            })
+        })
+
+        function lazyLoad() {
+            $('.wrap .img').each(function () {
+                if (isShow(this)) {
+                    loadImg(this)
+                }
+            })
+        }
+
+        function isShow(node) {
+            var w_h = parseInt($(window).height())
+            var w_s = parseInt($(window).scrollTop())
+            var offset = parseInt($(node).offset().top)
+            if (w_h + w_s < offset) {
+                return false;
+            } else {
+                return true
+            }
+        }
+
+        function loadImg(node) {
+            var realSrc = $(node).attr('data-src')
+            if ($(node).attr('src') !== realSrc) {
+                //console.log(1)
+                $(node).attr('src', realSrc)
+            }   
+        }
+    </script>
+</body>
+</html>

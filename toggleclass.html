@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>toggle</title>
+    <link href="https://cdn1.clloz.com/blog/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+      div {
+          font-size: 24px;
+	  cursor: pointer;
+      }
+      div.active .fa-play,
+      div .fa-pause {
+        display: none;
+      }
+      div.active .fa-pause,
+      div .fa-play {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="active">
+        <i class="fa fa-play"></i>
+        <i class="fa fa-pause"></i>
+    </div>
+    <script src="https://cdn1.clloz.com/project/jquery/jquery.min.js"></script>
+    <script>
+      $('div').on('click', function () {
+        $(this).toggleClass('active');
+      })
+    </script>
+  </body>
+</html>

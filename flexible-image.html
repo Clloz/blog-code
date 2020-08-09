@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>保持纵横比的盒子</title>
+    <style>
+        p {
+            width: 50%;
+            height: auto;
+            text-align: center;
+            font-size: 20px;
+        }
+        .aspect1 {
+            height: 21.6vw;
+            width: 38.4vw;
+            background-image: url('https://img.clloz.com/blog/writing/bg.jpg');
+            background-size: cover;
+        }
+        .wrapper {
+            width: 50%;
+        }
+        .aspect2 {
+            padding-top: 56.25%;
+            background-image: url('https://img.clloz.com/blog/writing/bg.jpg');
+            background-size: cover;
+        }
+        .aspect3 {
+            width: 50%;
+        }
+        .aspect3 img {
+            max-width: 100%;
+        }
+        .aspect4 {
+            width: 50%;
+            padding-top: 28.125%;
+            position: relative;
+        }
+        .aspect4>img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="aspect1"></div>
+    <p>图1</p>
+    <div class="wrapper">
+        <div class="aspect2"></div>
+    </div>
+    <p>图2</p>
+    <div class="aspect3">
+        <img src="https://img.clloz.com/blog/writing/bg.jpg" alt="">
+    </div>
+    <p>图3</p>
+    <div class="aspect4">
+        <img src="https://img.clloz.com/blog/writing/bg.jpg" alt="">
+    </div>
+    <p>图4</p>
+</body>
+</html>

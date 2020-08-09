@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>text-scroll</title>
+    <style>
+      .wrap {
+        margin: 0 auto;
+        width: 200px;
+        border: 1px solid;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .wrap .content {
+        height: 20px;
+      }
+
+      .wrap p {
+        position: relative;
+        left: 0;
+        display: inline-block;
+        margin: 0;
+        padding-right: 15px;
+        font-size: 16px;
+        line-height: 20px;
+        background: lightblue;
+        box-sizing: border-box;
+      }
+
+      .wrap p.transitioned {
+        transition: left linear 3s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap eg1">
+      <div class="content">
+        <p>1.当文字超出范围的时候开始滚动 </p><p>1.当文字超出范围的时候开始滚动</p>
+      </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      var $text = $(".wrap p");
+      var $wrap = $(".wrap");
+      var t_w = $text.outerWidth();
+      console.log(t_w)
+      var wrap_w = $wrap.width();
+
+      function textScroll() {
+        if (t_w > wrap_w) {
+          $text.addClass("transitioned");
+          $text.css("left", -t_w + "px");
+        }
+      }
+
+      $(document).ready(function() {
+        textScroll();
+      });
+
+      $text.on("transitionend webkitTransitionEnd oTransitionEnd", function() {
+        console.log("end");
+        $(this).removeClass("transitioned");
+        $(this).css("left", 0);
+        setTimeout(() => {
+          $text.addClass("transitioned");
+          $text.css("left", -t_w + "px");
+        }, 4);
+      });
+    </script>
+  </body>
+</html>

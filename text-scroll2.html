@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>text-scroll</title>
+    <style>
+      .wrap {
+        margin: 0 auto;
+        width: 200px;
+        border: 1px solid;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .wrap .content {
+        height: 20px;
+      }
+
+      .wrap p {
+        position: relative;
+        left: 0;
+        display: inline-block;
+        margin: 0;
+        padding-right: 15px;
+        font-size: 16px;
+        line-height: 20px;
+        background: lightblue;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap eg1">
+      <div class="content">
+        <p>1.当文字超出范围的时候开始滚动当文字超出范围的时候开始滚动</p><p>1.当文字超出范围的时候开始滚动当文字超出范围的时候开始滚动</p>
+      </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      var $text = $(".wrap p");
+      var $wrap = $(".wrap");
+      var t_w = $text.outerWidth();
+      var wrap_w = $wrap.width();
+      var mouse = false
+      var timer = null
+
+      function init() {
+          animation()
+      }
+
+      function animation() {
+          timer = setInterval(() => {
+            scroll()
+          }, 10)
+      }
+
+      function scroll() {
+        var left = parseInt($text.css('left'))
+          if (left > -t_w) {
+            //   console.log(left)
+              $text.css('left', left - 1 + 'px')
+          } else {
+              $text.css('left', '0')
+          }
+      }
+
+      $('.content').on('mouseenter', function (e) {
+          e.stopPropagation()
+          console.log(1)
+        clearInterval(timer)
+      })
+      $('.content').on('mouseout', function (e) {
+          console.log(2)
+          e.stopPropagation()
+        animation()
+      })
+
+      init()
+    </script>
+  </body>
+</html>

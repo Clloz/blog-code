@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #btn-list {
+            display: inline-block;
+        }
+        li {
+            list-style-type: none;
+            height: 50px;
+            min-width: 50px;
+            padding: 8px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid;
+            float: left;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <input id="val" type="text">
+    <div id="btn-list">
+        <button id="left-in" data-dir="left" data-action="in">左侧入</button>
+        <button id="right-in" data-dir="right" data-action="in">右侧入</button>
+        <button id="left-out" data-dir="left" data-action="out">左侧出</button>
+        <button id="right-out" data-dir="right" data-action="out">右侧出</button>
+    </div>
+    
+    <ul id="queue"></ul>
+    <script>
+        var btn_list = document.getElementById("btn-list");
+        var queue = document.getElementById("queue");
+        var list = document.getElementsByTagName('li');
+        
+        function addEl(text, dir) {
+            var li = document.createElement("li");
+            var text = document.createTextNode(text);
+            li.appendChild(text);
+            if (!list.length) {
+                queue.appendChild(li);
+            }
+            if (dir === "left" && !!list.length) {
+                queue.insertBefore(li, list[0]);
+            }
+            if (dir === "right" && !!list.length) {
+                queue.appendChild(li);
+            }
+        }
+
+        function removeEl(dir) {
+            if (!list.length) {
+                alert("没有元素可以删除！");
+            }
+            if (!!list.length && dir === "left") {
+                queue.removeChild(queue.childNodes[0]);
+            }
+            if (!!list.length && dir === "right") {
+                var len = list.length - 1;
+                queue.removeChild(queue.childNodes[list.length-1]);
+            }
+        }
+
+        btn_list.addEventListener("click", function (e) {
+            var val = document.getElementById("val").value;
+            var btn = e.target;
+            if (val === "" || isNaN(val)) {
+                alert("请输入正确的数字！");
+            } else {
+                if (btn.getAttribute("data-action") === "in") {
+                    addEl(val, btn.getAttribute("data-dir"));
+                } else {
+                    removeEl(btn.getAttribute("data-dir"));
+                }
+            }
+        })
+    </script>
+</body>
+</html>

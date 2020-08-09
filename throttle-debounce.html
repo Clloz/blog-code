@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>throttle</title>
+    <style>
+        div {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .wrap {
+            /* position: absolute; */
+            /* top: 50%; */
+            /* left: 50%; */
+            display: inline-block;
+            height: 200px;
+            width: 200px;
+            margin-left: 30px;
+            padding: 0 10px;
+            /* transform: translate(-50%, -50%); */
+            border: 1px solid black;
+            overflow: auto;
+        }
+
+        .content {
+            width: 100%;
+            height: 500px;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap n1">
+        <div class="content"></div>
+    </div>
+    <div class="wrap n2">
+        <div class="content"></div>
+    </div>
+    <div class="wrap n3">
+        <div class="content"></div>
+    </div>
+    <div class="wrap n4">
+        <div class="content"></div>
+    </div>
+    <script>
+        var wrap1 = document.querySelector('.wrap.n1')
+        var content1 = document.querySelector('.n1 .content')
+
+        var wrap2 = document.querySelector('.wrap.n2')
+        var content2 = document.querySelector('.n2 .content')
+
+        var wrap3 = document.querySelector('.wrap.n3')
+        var content3 = document.querySelector('.n3 .content')
+
+        var wrap4 = document.querySelector('.wrap.n4')
+        var content4 = document.querySelector('.n4 .content')
+
+        //throttle normal
+        wrap1.addEventListener('scroll', function () {           
+            console.log('dispatch')
+        })
+
+        //throttle
+        wrap2.addEventListener('scroll', throttle(function () {
+            console.log('dispatch: ' + new Date().getTime());
+        }, 300))
+        
+        function throttle (fn, interval) {
+            var executing = false;
+            return function () {
+                if (executing) return;
+                executing = true;
+                setTimeout(function () {
+                    fn.call(this, arguments);
+                    executing = false;
+                }.bind(this), interval)
+            }
+        }
+
+        //debounce normal
+        wrap3.addEventListener('scroll', function () {        
+            if (parseFloat(window.getComputedStyle(wrap3).getPropertyValue('height')) + wrap3.scrollTop + 30 > parseFloat(window.getComputedStyle(content3).getPropertyValue('height'))) {
+                console.log('dispatch')
+            }
+        })
+        
+        //debounce
+        wrap4.addEventListener('scroll', debounce(function () {
+            console.log('dispatch')
+        }, 300))
+
+        function debounce(fn, interval) {
+            let timeout = null;
+            let isLoad = false;
+            return function () {
+                if (parseFloat(window.getComputedStyle(wrap4).getPropertyValue('height')) + wrap4.scrollTop + 50 > parseFloat(window.getComputedStyle(content4).getPropertyValue('height'))) {
+                    if (isLoad) return;
+                    clearTimeout(timeout)
+                    console.log('clear')
+                    timeout = setTimeout(() => {
+                        fn.apply(this. arguments);
+                        isLoad = true;
+                    }, interval)
+                }
+            }
+        }
+    </script>
+</body>
+</html>

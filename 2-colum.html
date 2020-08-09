@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>两栏布局</title>
+    <style>
+        .wrap {
+            height: 250px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .wrap .left,
+        .wrap .right {
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 30px;
+            line-height: 1.5;
+        }
+
+        .wrap .left {
+            background-color: pink;
+            width: 200px;
+            height: 200px;
+        }
+
+        .wrap .right {
+            background-color: #32afd8;
+        }
+
+        /* eg1 */
+        .eg1 .left {
+            float: left;
+        }
+
+        .eg1 .right {
+            margin-left: 210px;
+        }
+
+        /* eg2 */
+        .eg2 {
+            font-size: 0px;
+        }
+
+        .eg2 .left,
+        .eg2 .right {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .eg2 .left {
+            width: 200px;
+        }
+
+        .eg2 .right {
+            width: calc(100% - 210px);
+            margin-left: 10px;
+        }
+
+        /* eg3 */
+        .eg3 .left,
+        .eg3 .right {
+            float: left;
+        }
+
+        .eg3 .right {
+            width: calc(100% - 210px);
+            margin-left: 10px;
+        }
+
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* eg4 */
+        .eg4 .left {
+            position: absolute;
+        }
+
+        .eg4 .right {
+            margin-left: 210px;
+        }
+
+        /* .eg5 */
+        .eg5 .left {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .eg5 .right {
+            overflow: hidden;
+        }
+
+        /* eg6 */
+        .wrap.wrap-flex {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .wrap.wrap-flex .left {
+            flex: 0 0 auto;
+        }
+
+        .wrap.wrap-flex .right {
+            flex: 1 1 auto;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap eg1">
+        <div class="left"></div>
+        <div class="right">例一：float和margin-left</div>
+    </div>
+    <div class="wrap eg2">
+        <div class="left"></div>
+        <div class="right">例二：inline-block和calc, 注意vertical-align</div>
+    </div>
+    <div class="wrap eg3 clearfix">
+        <div class="left"></div>
+        <div class="right">例三：两个float和calc，注意清除浮动</div>
+    </div>
+    <div class="wrap eg4">
+        <div class="left"></div>
+        <div class="right">例四：absolute和margin-left；注意父元素的position要为非static</div>
+    </div>
+    <div class="wrap eg5">
+        <div class="left"></div>
+        <div>
+
+        </div>
+        <div class="right">例五：float和BFC，左侧浮动右侧bfc，bfc不会与float元素重叠。注意在设置margin的时候如果是设置右边元素的margin-left需要加上左边元素的宽度</div>
+    </div>
+    <div class="wrap wrap-flex eg6">
+        <div class="left"></div>
+        <div class="right">例六：flex布局，比较好的解决方案，唯一要注意的是兼容性问题</div>
+    </div>
+</body>
+
+</html>

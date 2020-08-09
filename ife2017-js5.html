@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #btn-list {
+            display: inline-block;
+        }
+        ul {
+            max-width: 2200px;
+        }
+        li {
+            list-style-type: none;
+            width: 30px;
+            background-color: gray;
+            display: inline-block;
+            margin-left: 5px;
+            text-align:center;
+            color: white;
+            vertical-align: bottom;
+            position: relative;
+        }
+        li > p {
+            position: absolute;
+            top: 100%;
+            color: black;
+            margin: 0;
+            padding: 5px;
+            width: 30px;
+            box-sizing: border-box;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <input id="val" type="text">
+    <div id="btn-list">
+        <button id="left-in" data-dir="left" data-action="in">左侧入</button>
+        <button id="right-in" data-dir="right" data-action="in">右侧入</button>
+        <button id="left-out" data-dir="left" data-action="out">左侧出</button>
+        <button id="right-out" data-dir="right" data-action="out">右侧出</button>
+    </div>
+    <button id="sort">排序</button>
+    
+    <ul id="queue"></ul>
+    <script>
+        var btn_list = document.getElementById("btn-list");
+        var queue = document.getElementById("queue");
+        var list = document.getElementsByTagName('li');
+        var sort_btn = document.getElementById("sort")
+        var sum = 1;
+        
+        //添加元素
+        function addEl(text, dir) {
+            var li = document.createElement("li");
+            var h = document.createTextNode(text);
+            var p = document.createElement("p");
+            var num = document.createTextNode(sum);
+            p.appendChild(num);
+            li.style.height = `${text*2}px`;
+            li.style.lineHeight = `${text*2}px`;
+            li.appendChild(h);
+            li.appendChild(p);
+            if (!list.length) {
+                queue.appendChild(li);
+            }
+            if (dir === "left" && !!list.length) {
+                queue.insertBefore(li, list[0]);
+            }
+            if (dir === "right" && !!list.length) {
+                queue.appendChild(li);
+            }
+            sum++;
+        }
+        
+        //移除元素
+        function removeEl(dir) {
+            if (!list.length) {
+                alert("没有元素可以删除！");
+            } else {
+                sum--;
+            }
+            if (!!list.length && dir === "left") {
+                resetMark(queue.childNodes[0].getElementsByTagName("p")[0].childNodes[0].nodeValue);
+                queue.removeChild(queue.childNodes[0]);
+            }
+            if (!!list.length && dir === "right") {
+                var len = list.length - 1;
+                resetMark(queue.childNodes[list.length-1].getElementsByTagName("p")[0].childNodes[0].nodeValue);
+                queue.removeChild(queue.childNodes[list.length-1]);
+            }
+        }
+
+        btn_list.addEventListener("click", function (e) {
+            var val = document.getElementById("val").value;
+            var btn = e.target;
+            if (val === "" || isNaN(val) || val < 10 || val > 100) {
+                alert("请输入10~100的数字！");
+            } else {
+                if (btn.getAttribute("data-action") === "in") {
+                    sum <= 60 ? addEl(val, btn.getAttribute("data-dir")) : alert("最多添加60个元素");
+                } else {
+                    removeEl(btn.getAttribute("data-dir"));
+                }
+            }
+        })
+
+        sort_btn.addEventListener("click", function () {
+            var list = document.getElementsByTagName("li");
+            list.length > 1 ? sort(list) : alert("元素数量太少，无法排序!");
+        })
+        
+        //排序 此处使用冒泡排序
+        async function sort(arr) {
+            var len = arr.length;
+            for (var i = 0; i < len; i++) {
+                for (var j = 0; j < len - i - 1; j++) {
+                    if (arr[j].childNodes[0].nodeValue > arr[j+1].childNodes[0].nodeValue) {
+                        swap(arr[j], arr[j+1]);
+                        await sleep(1000);
+                    }
+                }
+            }
+        }
+        
+        //快速排序
+        const quicksort1 = async (arr) => {
+            if(arr.lenght <= 1) {return arr;}
+            var left = [];
+            var right = [];
+            var pivot = arr[0]
+            for (var i = 1; i < arr.length; i++) {
+                if (arr[i] < pivot) {
+                    left.push(arr[i]);
+                } else {
+                    right.push(arr[i]);
+                }
+            }
+            return quicksort1(left).concat(pivot, quicksort1(right))
+        }
+        
+        //快速排序
+        const quicksort2 = async (arr) => {
+            
+        }
+
+        //交换两个元素的位置
+        function swap(el1, el2) {
+            var temp1 = el1.cloneNode(true);
+            var temp2 = el2.cloneNode(true);
+            el1.parentNode.replaceChild(temp2, el1);
+            el2.parentNode.replaceChild(temp1, el2);
+        }
+
+        //队列左出时，所有下标减1
+        function resetMark(mark) {
+            var len = list.length;
+            for (var i = 0; i < len; i++) {
+                console.log(mark, list[i].getElementsByTagName("p")[0].childNodes[0].nodeValue, mark < list[i].getElementsByTagName("p")[0].childNodes[0].nodeValue)
+                if (parseInt(list[i].getElementsByTagName("p")[0].childNodes[0].nodeValue) > mark) {
+                    list[i].getElementsByTagName("p")[0].innerHTML = list[i].getElementsByTagName("p")[0].childNodes[0].nodeValue - 1;
+                }                              
+            }
+        }
+        
+        //设置sleep
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms))
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>animate</title>
+    <style>
+      .item {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        height: 200px;
+        width: 200px;
+        background: black;
+      }
+      .btn-panel {
+        margin-top: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="item"></div>
+    <div class="btn-panel">
+      <button class="btn show">show</button>
+      <button class="btn hide">hide</button>
+      <button class="btn slideup">slideup</button>
+      <button class="btn slidedown">slidedown</button>
+      <button class="btn fadein">fadein</button>
+      <button class="btn fadeout">fadeot</button>
+      <button class="btn slidetoggle">slidetoggle</button>
+      <button class="btn animate">animate</button>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $('.show').on('click', function () {
+        $('.item').show(1000);
+      })
+      $('.hide').on('click', function () {
+        $('.item').hide(1000);
+      })
+      $('.slideup').on('click', function () {
+        $('.item').slideUp(1000);
+      })
+      $('.slidedown').on('click', function () {
+        $('.item').slideDown(1000);
+      })
+      $('.fadein').on('click', function () {
+        $('.item').fadeIn(1000);
+      })
+      $('.fadeout').on('click', function () {
+        $('.item').fadeOut(1000);
+      })
+      $('.slidetoggle').on('click', function () {
+        $('.item').slideToggle(1000);
+      })
+      $('.animate').on('click', function () {
+        $('.item').animate({
+          left: '+=50'
+        }, 1000);
+      })
+    </script>
+  </body>
+</html>

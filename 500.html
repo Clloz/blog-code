@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>500</title>
+    <style>
+        html {
+	    position: fixed;
+	    width: 100%;
+	}
+	html, body {
+            height: 100%;
+            margin: 0;
+            background: #ff6470;
+        }
+        body {
+            overflow: hidden;
+        }
+        div.rotate{
+            height: 83%;
+            width: 200%;
+            transform:rotate(-25deg);
+            transform-origin: left bottom;
+            -ms-transform:rotate(-25deg); 	/* IE 9 */
+            -moz-transform:rotate(-25deg); 	/* Firefox */
+            -webkit-transform:rotate(-25deg); /* Safari 和 Chrome */
+            -o-transform:rotate(-25deg); 	/* Opera */
+            background: white;
+            position: absolute;
+            top: 0;
+            left: -1%;
+            border-bottom: 1px solid #807878;
+        }
+        div.center {
+            max-height: 886px;
+            min-height: 447px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            /* margin-left: -640px; */
+            border: 0;
+            border-radius: 64px;
+            box-shadow: -5px 0px 20px 5px #b5adad;
+            background-color: white;
+            background-image: url('https://img.clloz.com/blog/403/server/5001.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        a.btn {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            margin-left: -100px;
+            background-image: url('https://img.clloz.com/blog/403/server/btn.png');
+            background-color: white;
+            background-size: cover;
+        }
+        @media (max-width: 767px) {
+            div.center {
+		height: 50%;
+                width: 70%;
+                background-image: url('https://img.clloz.com/blog/403/server/500mobile.png');
+            }
+            a.btn {
+                background-image: url('https://img.clloz.com/blog/403/server/btn.png');
+                width: 150px;
+                height: 43.6px;
+                bottom: 20%;
+                left: 50%;
+                margin-left: -75px;
+            }
+        }
+        @media (min-width: 768px) {
+            div.center {
+                width: 560px;
+                height: 392px;
+            }
+            a.btn {
+                background-image: url('https://img.clloz.com/blog/403/server/btn.png');
+                width: 150px;
+                height: 43.6px;
+                bottom: 20%;
+                left: 50%;
+                margin-left: -75px;
+            }
+        }
+        @media (min-width: 1280px) {
+            div.center {
+                width: 960px;
+                height: 672px;
+            }
+            a.btn {
+                width: 200px;
+                height: 58px;
+                margin-left: -100px;
+                bottom: 15%;
+            }
+        }
+        @media (min-width: 1725px) {
+            div.center {
+                width: 1280px;
+                height: 896px;
+            }
+            a.btn {
+                width: 300px;
+                height: 87px;
+                margin-left: -150px;
+                bottom: 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rotate"></div>
+    <div class="center">
+        <a class="btn" href="https://www.clloz.com"></a>
+    </div>
+</body>
+<script>
+   
+</script>
+</html>
+
+

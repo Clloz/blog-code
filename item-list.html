@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>toggle</title>
+    <style>
+      .wrap {
+        width: 746px;
+        /* border: 1px solid; */
+        margin: 0 auto;
+      }
+
+      .wrap::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+      .wrap .item {
+        position: relative;
+        float: left;
+        margin-left: 20px;
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+
+      .item .cover {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+        opacity: 0;
+      }
+
+      .item .cover.active {
+        opacity: 1;
+      }
+
+      .item .cover .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .text {
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .btn-panel {
+        text-align: center;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="item">
+        <div class="cover">
+          <div class="btn">删除</div>
+        </div>
+        <div class="content">
+          <img src="img/1.jpeg" alt="" class="img" />
+          <p class="text title">物品1</p>
+          <p class="text price">¥820</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="cover">
+            <div class="btn">删除</div>
+        </div>
+        <div class="content">
+          <img src="img/2.jpeg" alt="" class="img" />
+          <p class="text title">物品1</p>
+          <p class="text price">¥735</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="cover">
+            <div class="btn">删除</div>
+        </div>
+        <div class="content">
+          <img src="img/3.jpeg" alt="" class="img" />
+          <p class="text title">物品1</p>
+          <p class="text price">¥1002</p>
+        </div>
+      </div>
+    </div>
+    <div class="btn-panel">
+      <button class="btn add">添加</button>
+      <button class="btn edit">编辑</button>
+    </div>
+    <script src="https://cdn1.clloz.com/project/jquery/jquery.min.js"></script>
+    <script>
+      $('.add').on('click', function () {
+	var num = $('.item').length;
+        var html = `<div class="item">
+        <div class="cover">
+          <div class="btn">删除</div>
+        </div>
+        <div class="content">
+          <img src="img/` + (++num % 12) + `.jpeg" alt="" class="img" />
+          <p class="text title">物品` + num + `</p>
+          <p class="text price">¥` + Math.floor(Math.random()*10000) + `</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="cover">
+            <div class="btn">删除</div>
+        </div>
+        <div class="content">
+          <img src="img/` + (++num % 12) + `.jpeg" alt="" class="img" />
+          <p class="text title">物品` + num + `</p>
+          <p class="text price">¥` + Math.floor(Math.random()*10000) + `</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="cover">
+            <div class="btn">删除</div>
+        </div>
+        <div class="content">
+          <img src="img/` + (++num % 12) + `.jpeg" alt="" class="img" />
+          <p class="text title">物品` + num + `</p>
+          <p class="text price">¥` + Math.floor(Math.random()*10000) + `</p>
+        </div>
+      </div>
+    </div>`
+        if ($('.cover').eq(0).hasClass('active')) {
+          $('.edit').trigger('click');
+        }
+        $('.wrap').append($(html))
+      })
+
+      $('.edit').on('click', function () {
+        $('.cover').toggleClass('active');
+      })
+      $('.wrap').on('click', '.cover .btn', function () {
+        $(this).parents('.item').remove();
+      })
+    </script>
+  </body>
+</html>

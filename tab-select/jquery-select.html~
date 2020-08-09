@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>jquery-select</title>
+    <style>
+      * {
+	  margin: 0;
+	  padding: 0;
+      }
+
+      .mod_tab {
+	  font-size: 0;
+	  padding: 10px;
+      }
+
+      .mod_tab .tab {
+	  display: inline-block;
+	  padding: 10px;
+	  background: #ddd;
+	  border-top: 1px solid #ccc;
+	  border-left: 1px solid #ccc;
+	  font-size: 14px;
+	  border-collapse:collapse;
+	  cursor: pointer;
+      }
+
+      .mod_tab .tab.active {
+	  background: white;
+      }
+
+      .mod_tab .tab:last-child {
+	  border-right: 1px solid #ccc;
+      }
+
+      .mod_tab .panel {
+	  border: 1px solid #ccc;
+	  font-size: 14px;
+	  padding: 10px;
+	  height: 250px;
+	  width: 300px;
+	  display: none;
+      }
+
+      .mod_tab .panel.active {
+	  display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mod_tab">
+      <div class="header">
+        <div class="tab active">1</div>
+        <div class="tab">2</div>
+        <div class="tab">3</div>
+        <div class="tab">4</div>
+      </div>
+      <div class="content">
+        <div class="panel active">panel1</div>
+        <div class="panel">panel2</div>
+        <div class="panel">panel3</div>
+        <div class="panel">panel4</div>
+      </div>
+    </div>
+    <div class="mod_tab">
+      <div class="header">
+        <div class="tab active">1</div>
+        <div class="tab">2</div>
+        <div class="tab">3</div>
+        <div class="tab">4</div>
+      </div>
+      <div class="content">
+        <div class="panel active">panel1</div>
+        <div class="panel">panel2</div>
+        <div class="panel">panel3</div>
+        <div class="panel">panel4</div>
+      </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $('.mod_tab .tab').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        var index = $(this).index();
+        $(this).parents('.mod_tab').find('.panel').eq(index).addClass('active').siblings().removeClass('active')
+      })
+    </script>
+  </body>
+</html>

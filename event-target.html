@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Test</title>
+    <style>
+      div {
+        display: inline-block;
+        padding: 50px;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      container
+      <div class="box">
+        box
+        <div class="target">target</div>
+      </div>
+    </div>
+    <script>
+      function $(selector) {
+        return document.querySelector(selector);
+      }
+      var ct = $(".container");
+      var box = $(".box");
+      var tag = $(".target");
+
+      ct.addEventListener("click", function (e) {
+        console.log("container事件冒泡中");
+        console.log("e.target为：")
+        console.log(e.target);
+        console.log("e.currentTarget为：")
+        console.log(e.currentTarget);
+      }, false);
+      ct.addEventListener("click", function (e) {
+        console.log("container事件捕获中");
+        console.log("e.target为：")
+        console.log(e.target);
+        console.log("e.currentTarget为：")
+        console.log(e.currentTarget);
+      }, true);
+
+      box.addEventListener("click", function (e) {
+        console.log("box事件冒泡中");
+        console.log("e.target为：")
+        console.log(e.target);
+        console.log("e.currentTarget为：")
+        console.log(e.currentTarget);
+      }, false);
+      box.addEventListener("click", function (e) {
+        console.log("box事件捕获中");
+        console.log("e.target为：")
+        console.log(e.target);
+        console.log("e.currentTarget为：")
+        console.log(e.currentTarget);
+      }, true);
+
+      tag.addEventListener("click", function (e) {
+        console.log("tag事件冒泡中");
+        console.log("e.target为：")
+        console.log(e.target);
+        console.log("e.currentTarget为：")
+        console.log(e.currentTarget);
+      }, false);
+      tag.addEventListener("click", function (e) {
+        console.log("tag事件冒泡中");
+        console.log("e.target为：")
+        console.log(e.target);
+        console.log("e.currentTarget为：")
+        console.log(e.currentTarget);
+      }, true);
+    </script>
+  </body>
+</html>
